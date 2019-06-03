@@ -1,0 +1,264 @@
+@font-face {
+    font-family: 'Proxima Nova Alt';
+    src: url(fonts/Proxima-Nova-Alt-Bold.otf);
+}
+
+.grid-container {
+    padding: 0 13% 0 13%;
+    width: 74%;
+    font-family: 'Roboto', sans-serif;
+}
+
+#title {
+    font-family: 'Proxima Nova Alt', Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 64px;
+}
+
+#userInputContainer {
+    margin-bottom: 24px;
+}
+
+#inputTask {
+    margin: 0;
+    font-weight: 200;
+    font-size: 20px;
+    background-color: #FCFCFC;
+    border: 1px solid #7393A3;
+    border-radius: 8px;
+    padding: 20px;
+    height: 54px;
+    width: 98%;
+}
+
+#submitBtn {
+    width: 100%;
+    height: 100%;
+    background: #00A8A8;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    background: #00a8a8;
+    border: 2px solid #00a8a8;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.16);  
+}
+
+#submitBtn:hover {
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);  
+}
+
+input[type="submit"] {
+    outline: none
+}
+
+#filter-container {
+    margin-bottom: 24px;
+    border: 2px solid #00A8A8;
+    border-radius: 8px;
+}
+
+.filter-btn {
+    border-right: 2px solid #00A8A8;
+    padding: 4px;
+    font-size: 18px;
+    color: #00A8A8;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.filter-btn:last-child {
+    border-right: none;
+}
+
+.filter-btn.active, .filter-btn:hover {
+    background: #00A8A8;
+    color: white;
+}
+
+#tasks {
+    list-style-type: none;
+    margin-left: 0;
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15);
+
+}
+
+.task {
+    display: block;
+    position: relative;
+    padding-left: 60px;
+    font-size: 18px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    cursor: auto
+}
+
+.task-container {
+    border-bottom: 1px solid #D9D9D9;
+    position: relative;
+}
+
+.task-container:last-child {
+    border-bottom: none;
+}
+
+.task input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    margin: 0;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 30px;
+    height: 20px;
+    width: 20px;
+    background-color: #ffffff;
+    border: 2px solid #00CECE;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.task input:checked ~ .checkmark {
+    background-color: #00CECE;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.task input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.task .checkmark:after {
+    left: 6px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.fas.fa-ellipsis-v {
+    font-size: 18px;
+    position: absolute;
+    margin: 0;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    right: 20px;
+    color: #E6E6E6;
+    cursor: pointer
+}
+
+.fas.fa-ellipsis-v:hover {
+    color: #00CECE
+}
+
+.menu-container {
+    position: absolute;
+    right: -84px;
+    top: 40px;
+    z-index: 100;
+    width: 110px;
+    background: white;
+    border: 0.5px solid #d9d9d9;
+    border-radius: 5px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.16);
+    display: none;
+}
+
+.menu-option {
+    padding: 8px;
+    cursor: pointer
+}
+
+.menu-option:first-child {
+    border-bottom: 1px solid #d9d9d9;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.menu-option:first-child:hover {
+    color: rgba(0, 0, 0, 1);
+}
+
+.menu-option:last-child {
+    color: rgba(255, 0, 0, 0.7);
+}
+
+.menu-option:last-child:hover {
+    color: rgba(255, 0, 0, 1);
+}
+
+#editTask {
+    width: 90%;
+    margin: 0;
+    border-radius: 5px;
+}
+
+#saveTask {
+    margin-top: 12px;
+    padding: 5px 18px;
+    border-radius: 5px;
+    border: none;
+    background: #00a8a8;
+    color: #fff;
+    cursor: pointer;
+    border: 2px solid #00a8a8;
+}
+
+#saveTask:hover {
+    color: #00A8A8;
+    background: #fff
+}
+
+.nothing-found {
+    padding: 15px;
+    color: #00A8A8;
+    font-style: italic;
+}
+
+@media all and (max-width: 991px) {
+    .grid-container {
+        padding: 0 10% 0 10%;
+        width: 80%;
+    }
+}
+
+@media all and (max-width: 768px) {
+    .grid-container {
+        padding: 0 8% 0 8%;
+        width: 84%;
+    }
+
+    #editTask {
+        width: 86%;
+    }
+}
+
+@media all and (max-width: 524px) {
+    .grid-container {
+        padding: 0 5% 0 5%;
+        width: 90%;
+    }
+
+    .menu-container {
+        right: -20px;
+    }
+}
