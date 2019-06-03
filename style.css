@@ -261,4 +261,8 @@ input[type="submit"] {
     .menu-container {
         right: -20px;
     }
+
+    .filter-btn {
+        font-size: 16px;
+    }
 }
