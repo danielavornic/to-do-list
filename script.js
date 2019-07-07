@@ -1,31 +1,52 @@
-var tasks = [{name: 'task 1', status: 'done', index: 0}, {name: 'task 2', status: 'in progress', index: 1}];
+if (localStorage.getItem("tasks") === null) {
+    var tasks = [{name: 'task 1', status: 'done', index: 0}, {name: 'task 2', status: 'in progress', index: 1}];
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+} else {
+    var tasks = JSON.parse(localStorage.getItem("tasks"));
+}
 var filter = 'all';
 
-function showTasks() {
+var nothingFoundEl = '<li class="nothing-found text-center">no tasks were found</li>';
+function nothingFound() {
+    var len = 0;
     tasks.forEach(function(task) {
         if (task.status == filter || filter == 'all') {
-            var checked = '';
-            var style = '';
-            if (task.status == 'done') {
-                checked = 'checked';
-                style = 'style="text-decoration:line-through"'
-            }
-            var taskEl = '<li class="task-container">'+
-                            '<label '+style+' class="task" id="'+task.index+'">'+task.name+
-                                '<input type="checkbox" class="taskChk" '+checked+'/>'+
-                                '<span class="checkmark"></span>'+
-                            '</label>'+
-                            '<i class="fas fa-ellipsis-v menu-handler"></i>'+
-                            '<div class="menu-container">'+
-                                '<div class="grid-y">'+
-                                    '<div class="cell text-center menu-option edit">edit</div>'+
-                                    '<div class="cell text-center menu-option delete">delete</div>'+
-                                '</div>'+
-                            '</div>';
-                        '</li>'
-            if ($('#'+task.index).length == 0) {$('#tasks').append(taskEl);}
-        } 
+            len++
+        }
     })
+    return len;
+}
+
+function showTasks() {
+    if (nothingFound() > 0) {
+        tasks.forEach(function(task) {
+            if (task.status == filter || filter == 'all') {
+                var checked = '';
+                var style = '';
+                if (task.status == 'done') {
+                    checked = 'checked';
+                    style = 'style="text-decoration:line-through"'
+                }
+                var taskEl = '<li class="task-container">'+
+                                '<label '+style+' class="task" id="'+task.index+'">'+task.name+
+                                    '<input type="checkbox" class="taskChk" '+checked+'/>'+
+                                    '<span class="checkmark"></span>'+
+                                '</label>'+
+                                '<i class="fas fa-ellipsis-v menu-handler"></i>'+
+                                '<div class="menu-container">'+
+                                    '<div class="grid-y">'+
+                                        '<div class="cell text-center menu-option edit">edit</div>'+
+                                        '<div class="cell text-center menu-option delete">delete</div>'+
+                                    '</div>'+
+                                '</div>';
+                            '</li>'
+                if ($('#'+task.index).length == 0) {$('#tasks').append(taskEl);}
+            } 
+        })
+    } else {
+        $('.nothing-found').remove();
+        $('#tasks').append(nothingFoundEl);
+    }
 }
 
 
@@ -61,10 +82,12 @@ function clickTask() {
             $(this).parent().parent().remove()
         }
 
-        if ($('#tasks li').length == 0) {
-            var message = '<li class="nothing-found text-center">no tasks were found</li>';
-            $('#tasks').append(message);
+        $('.nothing-found').remove();
+        if (nothingFound() == 0) {
+            $('#tasks').append(nothingFoundEl);
         }
+
+        localStorage.setItem("tasks", JSON.stringify(tasks));
     });
 }
 
@@ -102,6 +125,7 @@ function saveEditedTask(index) {
     $('#saveTask').click(function() {
         var editedTask = $('#editTask').val();
         tasks[index].name = editedTask;
+        localStorage.setItem("tasks", JSON.stringify(tasks));
         $('#'+index).children('form').remove();
         $('#'+index).prepend(editedTask)
     })
@@ -118,12 +142,13 @@ function deleteTask() {
         for (var i=index; i<tasks.length; i++) {
             tasks[i].index = i;
         }
+        localStorage.setItem("tasks", JSON.stringify(tasks));
 
         $(this).parents('li').remove();
 
-        if ($('#tasks li').length == 0) {
-            var message = '<li class="nothing-found text-center">no tasks were found</li>';
-            $('#tasks').append(message);
+        $('.nothing-found').remove();
+        if (nothingFound() == 0) {
+            $('#tasks').append(nothingFoundEl);
         }
     })
 }
@@ -139,10 +164,14 @@ $('#userInputContainer').submit(function(e) {
     if (task.name != '') {
         $('#inputTask').val('');
         tasks.push(task);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
         showTasks();
     }
 
     $('.nothing-found').remove();
+    if (nothingFound() == 0) {
+        $('#tasks').append(nothingFoundEl);
+    }
 
     clickTask();
     menu();
@@ -156,11 +185,12 @@ $('.filter-btn').click(function() {
     filter = $(this).text();
 
     $('#tasks').empty();
+    localStorage.setItem("tasks", JSON.stringify(tasks));
     showTasks();
 
-    if ($('#tasks li').length == 0) {
-        var message = '<li class="nothing-found text-center">no tasks were found</li>';
-        $('#tasks').append(message);
+    $('.nothing-found').remove();
+    if (nothingFound() == 0) {
+        $('#tasks').append(nothingFoundEl);
     }
 
     clickTask();
