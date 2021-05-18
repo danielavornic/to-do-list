@@ -3,9 +3,13 @@
     src: url(fonts/Proxima-Nova-Alt-Bold.otf);
 }
 
+body {
+    background-color: #ffffff;
+}
+
 .grid-container {
-    padding: 0 13% 0 13%;
-    width: 74%;
+    padding: 0 15% 0 15%;
+    width: 70%;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -13,6 +17,7 @@
     font-family: 'Proxima Nova Alt', Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-size: 64px;
+    margin: 36px 0 28px;
 }
 
 #userInputContainer {
@@ -22,13 +27,18 @@
 #inputTask {
     margin: 0;
     font-weight: 200;
-    font-size: 20px;
+    font-size: 18px;
     background-color: #FCFCFC;
-    border: 1px solid #7393A3;
-    border-radius: 8px;
+    border: 2px solid #E6E6E6;
+    border-radius: 5px;
     padding: 20px;
     height: 54px;
     width: 98%;
+    box-shadow: none;
+}
+
+#inputTask:focus, #inputTask:hover {
+    border: 2px solid #00A8A8;
 }
 
 #submitBtn {
@@ -36,17 +46,16 @@
     height: 100%;
     background: #00A8A8;
     border: none;
-    border-radius: 5px;
-    color: white;
+    border-radius: 3px;
+    color: #ffffff;
     font-weight: bold;
     cursor: pointer;
     background: #00a8a8;
     border: 2px solid #00a8a8;
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.16);  
 }
 
-#submitBtn:hover {
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);  
+#submitBtn:hover, .saveTask:hover {
+    box-shadow: 0px 0px 15px 5px rgba(245,245,245,1);
 }
 
 input[type="submit"] {
@@ -56,13 +65,13 @@ input[type="submit"] {
 #filter-container {
     margin-bottom: 24px;
     border: 2px solid #00A8A8;
-    border-radius: 8px;
+    border-radius: 5px;
 }
 
 .filter-btn {
     border-right: 2px solid #00A8A8;
     padding: 4px;
-    font-size: 18px;
+    font-size: 16px;
     color: #00A8A8;
     font-weight: 500;
     cursor: pointer;
@@ -74,29 +83,28 @@ input[type="submit"] {
 
 .filter-btn.active, .filter-btn:hover {
     background: #00A8A8;
-    color: white;
+    color: #ffffff;
 }
 
 #tasks {
     list-style-type: none;
     margin-left: 0;
-    border: 1px solid #D9D9D9;
     border-radius: 5px;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15);
-
+    box-shadow: 0px 5px 15px 5px rgba(245,245,245,1);
+    margin-bottom: 56px;
 }
 
 .task {
     display: block;
     position: relative;
     padding-left: 60px;
-    font-size: 18px;
+    font-size: 16px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding-top: 14px;
+    padding-bottom: 14px;
     cursor: auto
 }
 
@@ -125,13 +133,13 @@ input[type="submit"] {
     height: 20px;
     width: 20px;
     background-color: #ffffff;
-    border: 2px solid #00CECE;
+    border: 2px solid #00a8a8;
     border-radius: 3px;
     cursor: pointer;
 }
 
 .task input:checked ~ .checkmark {
-    background-color: #00CECE;
+    background-color: #00a8a8;
 }
 
 .checkmark:after {
@@ -149,7 +157,7 @@ input[type="submit"] {
     top: 3px;
     width: 5px;
     height: 10px;
-    border: solid white;
+    border: solid #ffffff;
     border-width: 0 2px 2px 0;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
@@ -158,39 +166,42 @@ input[type="submit"] {
 
 .fas.fa-ellipsis-v {
     font-size: 18px;
+    text-align: center;
+    color: #E6E6E6;
+    cursor: pointer;
     position: absolute;
     margin: 0;
-    top: 50%;
     transform: translate(-50%, -50%);
-    right: 20px;
-    color: #E6E6E6;
-    cursor: pointer
+    top: 60%;
+    right: 5px;
+    width: 25px;
+    height: 30px;
 }
 
 .fas.fa-ellipsis-v:hover {
-    color: #00CECE
+    color: #00a8a8 !important
 }
 
 .menu-container {
     position: absolute;
-    right: -84px;
-    top: 40px;
+    right: -70px;
+    top: 48px;
     z-index: 100;
     width: 110px;
-    background: white;
-    border: 0.5px solid #d9d9d9;
+    background: #ffffff;
     border-radius: 5px;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 0px 15px 5px rgb(241, 241, 241);
     display: none;
 }
 
 .menu-option {
     padding: 8px;
-    cursor: pointer
+    cursor: pointer;
+    text-align: left;
+    padding-left: 20px;
 }
 
 .menu-option:first-child {
-    border-bottom: 1px solid #d9d9d9;
     color: rgba(0, 0, 0, 0.7);
 }
 
@@ -200,19 +211,23 @@ input[type="submit"] {
 
 .menu-option:last-child {
     color: rgba(255, 0, 0, 0.7);
+    padding-top: 0;
 }
 
 .menu-option:last-child:hover {
     color: rgba(255, 0, 0, 1);
 }
 
-#editTask {
+.editTask {
     width: 90%;
     margin: 0;
     border-radius: 5px;
+    background-color: #FCFCFC;
+    border: 2px solid #E6E6E6;
+    box-shadow: none;
 }
 
-#saveTask {
+.saveTask {
     margin-top: 12px;
     padding: 5px 18px;
     border-radius: 5px;
@@ -223,15 +238,9 @@ input[type="submit"] {
     border: 2px solid #00a8a8;
 }
 
-#saveTask:hover {
-    color: #00A8A8;
-    background: #fff
-}
-
 .nothing-found {
     padding: 15px;
     color: #00A8A8;
-    font-style: italic;
 }
 
 @media all and (max-width: 991px) {
@@ -247,7 +256,7 @@ input[type="submit"] {
         width: 84%;
     }
 
-    #editTask {
+    .editTask {
         width: 86%;
     }
 }

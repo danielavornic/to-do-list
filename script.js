@@ -71,7 +71,7 @@ function clickTask() {
         } else if (tasks[index].status == 'in progress') {
             tasks[index].status = 'done';
             $(this).css({
-                'backgroundColor': '#00CECE'
+                'backgroundColor': '#00a8a8'
             })
             $(this).parent().css({'text-decoration': 'line-through'})
         }
@@ -94,11 +94,18 @@ function clickTask() {
 function menu() {
     $(document).click(function() {
         $('.menu-container').hide();
+        $('.menu-handler').css('color', '#E6E6E6');
     });
     $('.menu-handler').click(function(e) {
         e.stopPropagation();
+        $('.menu-handler').css('color', '#E6E6E6');
+        $(this).css('color', '#00a8a8');
         $('.menu-container').hide();
-        $(this).next().show()
+        $(this).next().show();
+        var mousePositionY = e.pageY;
+        if ($(window).height() - mousePositionY < 150) {
+            $(this).next().css('top', '-68px');
+        }
     })
 
     deleteTask();
@@ -113,21 +120,23 @@ function editTask() {
         var index = task.index;
 
         label.contents().filter((_, el) => el.nodeType === 3).remove();
-        var form = '<form><input type="text" id="editTask" value="'+taskName+'"/><input id="saveTask" type="submit" value="save"></form>';
+        var form = '<form><input type="text" class="editTask" value="'+taskName+'"/><input class="saveTask" type="submit" value="save"></form>';
         label.prepend(form);
-        label.children('#editTask').focus();
+        label.children('.editTask').focus();
+        label.next().hide();
 
         saveEditedTask(index);
     })
 }
 
 function saveEditedTask(index) {
-    $('#saveTask').click(function() {
-        var editedTask = $('#editTask').val();
+    $('.saveTask').click(function() {
+        var editedTask = $('.editTask').val();
         tasks[index].name = editedTask;
         localStorage.setItem("tasks", JSON.stringify(tasks));
         $('#'+index).children('form').remove();
-        $('#'+index).prepend(editedTask)
+        $('#'+index).prepend(editedTask);
+        $('#'+index).next().show();
     })
 }
 
